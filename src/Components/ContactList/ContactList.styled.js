@@ -44,7 +44,7 @@ ContactList.prototype = {
   contacts: PropTypes.objectOf(
     PropTypes.shape({
       name: PropTypes.string,
-      number: PropTypes.number,
+      number: PropTypes.string,
       id: PropTypes.string,
     })
   ),

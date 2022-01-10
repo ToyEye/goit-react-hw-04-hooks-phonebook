@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "eslint-plugin-react-hooks": "^4.3.0",
     "prop-types": "^15.7.2"
   }
 }
