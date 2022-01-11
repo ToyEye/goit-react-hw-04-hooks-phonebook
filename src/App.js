@@ -82,7 +82,4 @@ export default function App() {
   );
 }
 
-App.propTypes = {
-  name: PropTypes.string,
-  number: PropTypes.string,
-};
+
