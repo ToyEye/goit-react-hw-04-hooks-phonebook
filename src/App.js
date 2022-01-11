@@ -8,7 +8,6 @@ import { nanoid } from 'nanoid';
 import Filter from './Components/Filter';
 import toast, { Toaster } from 'react-hot-toast';
 import NotificationMessage from './Components/NotificationMessage';
-import PropTypes from 'prop-types';
 
 function getContact() {
   return [
@@ -81,5 +80,3 @@ export default function App() {
     </Container>
   );
 }
-
-
