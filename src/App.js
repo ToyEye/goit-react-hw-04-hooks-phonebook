@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from './Components/Container';
 import Form from './Components/Form';
 import { Section, Title } from './Components/Section';
@@ -22,8 +22,20 @@ export default function App() {
   const [contacts, setContacts] = useState(() => getContact());
   const [filter, setFilter] = useState('');
 
+  useEffect(() => {
+    const storageContacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(storageContacts);
+    if (parsedContacts) {
+      setContacts(parsedContacts);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
+
   const addContact = ({ name, number }) => {
-    let array = contacts.map(contact => contact.name);
+    let array = contacts.filter(contact => contact.name);
     if (!array.includes(name)) {
       const newContact = {
         id: nanoid(),
