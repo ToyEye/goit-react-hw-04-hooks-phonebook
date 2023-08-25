@@ -1,32 +1,39 @@
-import './App.css';
-import React, { useState, useEffect } from 'react';
-import { Container } from './Components/Container';
-import Form from './Components/Form';
-import { Section, Title } from './Components/Section';
-import ContactList from './Components/ContactList';
-import { nanoid } from 'nanoid';
-import Filter from './Components/Filter';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import { nanoid } from 'nanoid';
+
+import { Container } from './Components/Container';
+import { Section, Title } from './Components/Section';
+import Form from './Components/Form';
+import ContactList from './Components/ContactList';
+import Filter from './Components/Filter';
 import NotificationMessage from './Components/NotificationMessage';
 
-function getContact() {
+type TContact = {
+  name: string;
+  number: string;
+};
+
+const getContact = () => {
   return [
     { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
     { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
     { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
     { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
   ];
-}
+};
 
-export default function App() {
+const App = () => {
   const [contacts, setContacts] = useState(() => getContact());
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    const storageContacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(storageContacts);
-    if (parsedContacts) {
-      setContacts(parsedContacts);
+    const storageContacts = JSON.parse(
+      localStorage.getItem('contacts') || '[]'
+    );
+
+    if (storageContacts) {
+      setContacts(storageContacts);
     }
   }, []);
 
@@ -34,29 +41,32 @@ export default function App() {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
-  const addContact = ({ name, number }) => {
-    let array = contacts.filter(contact => contact.name);
-    if (!array.includes(name)) {
-      const newContact = {
-        id: nanoid(),
-        name: name,
-        number: number,
-      };
-      toast.success('Контакт добавлен');
-      return setContacts(contacts => [newContact, ...contacts]);
-    } else {
-      toast.error('Контакт существует!');
+  const addContact = ({ name, number }: TContact) => {
+    const isExist = contacts.filter(contact => contact.name === name);
+
+    if (isExist) {
+      toast.error('Contact is Exist!');
       return;
     }
+
+    const newContact = {
+      id: nanoid(),
+      name,
+      number,
+    };
+
+    toast.success('Contact added');
+
+    setContacts(prevContacts => [newContact, ...prevContacts]);
   };
 
-  const deleteItem = itemId => {
+  const deleteItem = (itemId: string) => {
     setContacts(prevState =>
       prevState.filter(contact => contact.id !== itemId)
     );
   };
 
-  const filterEnter = evt => {
+  const filterEnter = (evt: ChangeEvent<HTMLInputElement>) => {
     setFilter(evt.target.value);
   };
 
@@ -91,4 +101,6 @@ export default function App() {
       </Section>
     </Container>
   );
-}
+};
+
+export default App;

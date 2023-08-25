@@ -1,26 +1,28 @@
-import React, { useState } from 'react';
-import styled from '@emotion/styled';
-import PropTypes from 'prop-types';
+import { useState, ChangeEvent, FormEvent } from 'react';
+
 import Button from '../Button';
-import { ImputEnter, InputType, InputText } from '../FormComponents';
 
-const FormStyled = styled.form`
-  display: flex;
-  flex-direction: column;
-  margin-left: auto;
-  margin-right: auto;
-  width: 450px;
-  padding: 10px 15px;
-  border: 1px solid black;
-  border-radius: 5px;
-`;
+import {
+  ImputEnter,
+  InputType,
+  InputText,
+  FormStyled,
+} from '../FormComponents';
 
-export default function Form({ onSubmit }) {
+type TContacts = {
+  name: string;
+  number: string;
+};
+
+type Props = {
+  onSubmit: (args: TContacts) => void;
+};
+const Form = ({ onSubmit }: Props) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const handleChange = evt => {
-    const { name, value } = evt.target;
+  const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = evt.currentTarget;
 
     switch (name) {
       case 'name':
@@ -34,7 +36,7 @@ export default function Form({ onSubmit }) {
     }
   };
 
-  const handleSubmit = evt => {
+  const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault();
 
     onSubmit({ name, number });
@@ -49,7 +51,6 @@ export default function Form({ onSubmit }) {
   return (
     <FormStyled onSubmit={handleSubmit}>
       <InputType>
-        {' '}
         <InputText>Name</InputText>
         <ImputEnter
           type="text"
@@ -63,7 +64,6 @@ export default function Form({ onSubmit }) {
         />
       </InputType>
       <InputType>
-        {' '}
         <InputText>Name</InputText>
         <ImputEnter
           type="tel"
@@ -79,8 +79,6 @@ export default function Form({ onSubmit }) {
       <Button type="submit">Add contact</Button>
     </FormStyled>
   );
-}
-
-Form.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
 };
+
+export default Form;

@@ -27,7 +27,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject", "lint:ts": "tsc --noEmit",
+    "eject": "react-scripts eject",
+    "lint:ts": "tsc --noEmit",
     "lint:js": "eslint src/**/*.js"
   },
   "eslintConfig": {

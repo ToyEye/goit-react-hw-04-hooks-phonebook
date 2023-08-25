@@ -1,1 +1,6 @@
-export { ImputEnter,InputType,InputText} from "./FormComponents.styled"
+export {
+  ImputEnter,
+  InputType,
+  InputText,
+  FormStyled,
+} from './FormComponents.styled';

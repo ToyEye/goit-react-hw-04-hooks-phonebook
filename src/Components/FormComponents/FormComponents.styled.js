@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const ImputEnter = styled.input`
+export const ImputEnter = styled.input`
   width: 220px;
   padding: 5px 15px;
   border-radius: 5px;
@@ -11,7 +11,7 @@ const ImputEnter = styled.input`
     border-color: #7cb1ec;
   }
 `;
-const InputType = styled.label`
+export const InputType = styled.label`
   margin-bottom: 10px;
   &:hover,
   &:active {
@@ -19,8 +19,17 @@ const InputType = styled.label`
   }
 `;
 
-const InputText = styled.p`
+export const InputText = styled.p`
   margin-bottom: 5px;
 `;
 
-export { ImputEnter, InputType, InputText };
+export const FormStyled = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  width: 450px;
+  padding: 10px 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+`;

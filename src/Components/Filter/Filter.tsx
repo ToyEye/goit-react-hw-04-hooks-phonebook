@@ -1,12 +1,18 @@
-import React from 'react';
+import { ChangeEvent } from 'react';
+
 import { ImputEnter, InputType, InputText } from '../FormComponents';
 import PropTypes from 'prop-types';
 
-const Filter = ({ onChange }) => {
+type Props = {
+  value: string;
+  onChange: (evt: ChangeEvent<HTMLInputElement>) => void;
+};
+
+const Filter = ({ onChange, value }: Props) => {
   return (
-    <InputType onChange={onChange}>
+    <InputType>
       <InputText>Find contact by name</InputText>
-      <ImputEnter />
+      <ImputEnter onChange={onChange} value={value} />
     </InputType>
   );
 };

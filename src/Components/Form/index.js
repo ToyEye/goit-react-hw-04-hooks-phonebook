@@ -1,1 +1,1 @@
-export { default } from "./Form.styled"
+export { default } from './Form';
